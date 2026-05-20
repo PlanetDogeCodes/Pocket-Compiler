@@ -27,7 +27,7 @@
 - START: run/compile
 - SELECT: controls menu
 
-No pointer lock approximation was added.
+Pointer lock approximation was not added, but is a planned next feature.
 
 ### File explorer
 
