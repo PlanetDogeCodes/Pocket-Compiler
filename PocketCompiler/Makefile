@@ -14,7 +14,7 @@ INCLUDES := include
 
 APP_TITLE := Pocket Compiler
 APP_DESCRIPTION := HTML CSS JavaScript compiler/browser playground
-APP_AUTHOR := Galaxy AI Scaffold
+APP_AUTHOR := PlanetDogeCodes
 
 ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 CFLAGS := -g -Wall -O2 -mword-relocations -ffunction-sections $(ARCH)
