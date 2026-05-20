@@ -1,21 +1,11 @@
 <!doctype html>
 <html>
-<head>
-<title>Pocket Compiler v0.11 Sample</title>
-<style>
-body { background: black; color: white; }
-h1 { color: cyan; }
-p { color: #dddddd; }
-</style>
-</head>
+<head><title>Pocket Compiler v0.23 Phase 11</title></head>
 <body>
-<h1>Pocket Compiler v0.11</h1>
-<p>gzip/deflate, JavaScript, and image placeholders are enabled.</p>
+<h1>Controls + DOM Events + Web Audio</h1>
 <script>
-var msg = "JavaScript document.write executed.";
-document.write(msg);
-console.log("Inline JS ran");
+var audio = new AudioContext();
+document.addEventListener("click", function(){ console.log("click"); });
 </script>
-<img src="https://via.placeholder.com/64.png">
 </body>
 </html>
