@@ -1,4 +1,4 @@
-# Pocket Compiler v0.11 Full Source
+# Pocket Compiler
 
 Pocket Compiler is a Nintendo 3DS homebrew HTML/CSS/JavaScript playground and lightweight browser/compiler engine.
 
