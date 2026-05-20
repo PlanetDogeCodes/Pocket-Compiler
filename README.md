@@ -1,31 +1,43 @@
-# Pocket Compiler
+# Pocket Compiler v0.11 Full Source
 
-Self-contained Nintendo 3DS homebrew HTML editor + lightweight browser-engine foundation.
+Pocket Compiler is a Nintendo 3DS homebrew HTML/CSS/JavaScript playground and lightweight browser/compiler engine.
 
-This version reconstructs the v0.9 TLS/CA-bundle project and applies non-feature-changing stability fixes directly.
+This self-contained source package includes these advanced features:
 
-## Included features
+- gzip/deflate decompression support through zlib
+- lightweight JavaScript execution
+- image metadata decoding and image placeholder rendering
+- existing dark Citro2D UI architecture
+- editor/save/load scaffolding
+- resource discovery/cache architecture
+- 1 MB per-resource safety cap
+- HTTPS/TLS build-mode hooks and embedded CA bundle
 
-- dual-screen 3DS homebrew app
-- Citro2D/Citro3D dark UI
-- white panel outlines
-- bottom-screen editor
-- line-numbered, syntax-colored editor lines
-- top-screen layout preview
-- simple HTML parser
-- inline CSS capture
-- simple layout boxes
-- external CSS/JS/image resource discovery
-- SD cache directory
-- 1 MB per-resource cap
-- binary-safe cache writes
-- HTTP socket fetching
-- redirects
-- chunked-transfer decoding
-- HTTPS/TLS through mbedTLS or wolfSSL
-- embedded Mozilla/certifi CA bundle
-- certificate verification enabled
-- stability fixes for TLS read/write retry behavior
+## Important JavaScript note
+
+This build includes a small safe JavaScript execution layer suitable for 3DS memory limits. It supports:
+
+```js
+console.log("text");
+document.write("text");
+var msg = "text";
+let msg = "text";
+const msg = "text";
+document.write(msg);
+```
+
+Full ECMAScript support still requires adding a full VM such as MuJS, Duktape, or QuickJS.
+
+## Image support
+
+This build decodes image metadata for:
+
+- PNG
+- JPEG
+- GIF
+- BMP
+
+It renders image placeholders in the layout/preview path and records detected image type/dimensions where possible. Full pixel decoding/rendering is prepared as the next renderer step.
 
 ## Build
 
@@ -37,25 +49,23 @@ make TLS_BACKEND=mbedtls
 Alternative:
 
 ```bash
-make clean
 make TLS_BACKEND=wolfssl
 ```
 
-No-TLS debug build:
+No-TLS debug:
 
 ```bash
-make clean
 make TLS_BACKEND=none
 ```
 
-## Notes
+## Output
 
-- HTTPS certificate validation requires the 3DS date/time to be reasonably correct.
-- gzip/deflate decompression is not implemented yet.
-- JavaScript is cached but not executed yet.
-- Images are cached but not decoded/rendered yet.
+```text
+PocketCompiler.3dsx
+```
 
+Copy to:
 
-## Rebrand
-
-This project has been renamed to **Pocket Compiler**. The build target remains `PocketCompiler` to avoid spaces in generated filenames.
+```text
+sdmc:/3ds/PocketCompiler/PocketCompiler.3dsx
+```
