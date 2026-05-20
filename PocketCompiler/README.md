@@ -2,7 +2,7 @@
 
 Pocket Compiler is a Nintendo 3DS homebrew HTML/CSS/JavaScript playground and lightweight browser/compiler engine.
 
-This self-contained source package includes the requested v0.11 features:
+This self-contained source package includes these advanced features:
 
 - gzip/deflate decompression support through zlib
 - lightweight JavaScript execution
