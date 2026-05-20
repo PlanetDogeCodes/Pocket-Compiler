@@ -1,2 +1,2 @@
 # Pocket Compiler
-(COMING SOON) A fully featured HTML compiler homebrew application made for 3DS/n3DS consoles
+A fully featured HTML/JS/CSS compiler homebrew application made for 3DS/n3DS consoles
