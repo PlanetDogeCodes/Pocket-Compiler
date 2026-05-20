@@ -1,4 +1,4 @@
-# Pocket Compiler v0.18 Phase 6 Runtime
+# Pocket Compiler v0.18
 
 ## Implemented
 
