@@ -2,7 +2,7 @@
 
 Pocket Compiler is a Nintendo 3DS homebrew HTML/CSS/JavaScript playground and lightweight browser/compiler engine.
 
-This self-contained source package includes these advanced features:
+Some advanced features include:
 
 - gzip/deflate decompression support through zlib
 - lightweight JavaScript execution
@@ -26,7 +26,7 @@ const msg = "text";
 document.write(msg);
 ```
 
-Full ECMAScript support still requires adding a full VM such as MuJS, Duktape, or QuickJS.
+Full ECMAScript support still requires adding a full VM such as MuJS, Duktape, or QuickJS. 
 
 ## Image support
 
@@ -39,7 +39,7 @@ This build decodes image metadata for:
 
 It renders image placeholders in the layout/preview path and records detected image type/dimensions where possible. Full pixel decoding/rendering is prepared as the next renderer step.
 
-## Build
+## Build Instructions
 
 ```bash
 make clean
@@ -69,3 +69,4 @@ Copy to:
 ```text
 sdmc:/3ds/PocketCompiler/PocketCompiler.3dsx
 ```
+
