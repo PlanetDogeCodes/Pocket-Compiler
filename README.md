@@ -1,71 +1,44 @@
-# Pocket Compiler
+# Pocket Compiler v0.23
 
 Pocket Compiler is a Nintendo 3DS homebrew HTML/CSS/JavaScript playground and lightweight browser/compiler engine.
 
-Some advanced features include:
+## 3DS controls
 
-- gzip/deflate decompression support through zlib
-- lightweight JavaScript execution
-- image metadata decoding and image placeholder rendering
-- existing dark Citro2D UI architecture
-- editor/save/load scaffolding
-- resource discovery/cache architecture
-- 1 MB per-resource safety cap
-- HTTPS/TLS build-mode hooks and embedded CA bundle
+- D-Pad: arrow up/down/left/right in the code area
+- Circle Pad: mouse cursor movement
+- A: mouse click
+  - if over code area, opens 3DS keyboard to edit clicked line
+- B: undo
+- X: save code/project
+- Y: load code/project
+- START: run/compile code
+- SELECT: controls menu
 
-## Important JavaScript note
+## Project files
 
-This build includes a small safe JavaScript execution layer suitable for 3DS memory limits. It supports:
+Projects are saved to:
 
-```js
-console.log("text");
-document.write("text");
-var msg = "text";
-let msg = "text";
-const msg = "text";
-document.write(msg);
+```text
+sdmc:/3ds/PocketCompiler/projects
 ```
 
-Full ECMAScript support still requires adding a full VM such as MuJS, Duktape, or QuickJS. 
+## Web Audio subset
 
-## Image support
+- AudioContext-like runtime
+- OscillatorNode-like tone playback
+- GainNode-like volume
+- start/stop style helpers
+- NDSP-backed tone output with safe failure behavior
 
-This build decodes image metadata for:
-
-- PNG
-- JPEG
-- GIF
-- BMP
-
-It renders image placeholders in the layout/preview path and records detected image type/dimensions where possible. Full pixel decoding/rendering is prepared as the next renderer step.
-
-## Build Instructions
+## Build
 
 ```bash
 make clean
-make TLS_BACKEND=mbedtls
+make
 ```
 
-Alternative:
-
-```bash
-make TLS_BACKEND=wolfssl
-```
-
-No-TLS debug:
-
-```bash
-make TLS_BACKEND=none
-```
-
-## Output
+Output:
 
 ```text
 PocketCompiler.3dsx
-```
-
-Copy to:
-
-```text
-sdmc:/3ds/PocketCompiler/PocketCompiler.3dsx
 ```
