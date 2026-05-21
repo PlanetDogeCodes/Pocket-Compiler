@@ -13,7 +13,7 @@ SOURCES := source
 INCLUDES := include
 
 APP_TITLE := Pocket Compiler
-APP_DESCRIPTION := Almost fully featured HTML compiler for 3DS
+APP_DESCRIPTION := Almost fully featured HTML compiler for 3DS Systems
 APP_AUTHOR := PlanetDogeCodes
 
 ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
