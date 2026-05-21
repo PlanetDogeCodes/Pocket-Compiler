@@ -13,7 +13,7 @@ SOURCES := source
 INCLUDES := include
 
 APP_TITLE := Pocket Compiler
-APP_DESCRIPTION := HTML CSS JavaScript compiler/browser playground
+APP_DESCRIPTION := Almost fully featured HTML compiler for 3DS
 APP_AUTHOR := PlanetDogeCodes
 
 ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
@@ -28,10 +28,8 @@ export OUTPUT := $(CURDIR)/$(TARGET)
 export TOPDIR := $(CURDIR)
 export VPATH := $(foreach dir,$(SOURCES),$(CURDIR)/$(dir))
 export DEPSDIR := $(CURDIR)/$(BUILD)
-
 CFILES := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 export OFILES := $(CFILES:.c=.o)
-
 export INCLUDE := $(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) -I$(CURDIR)/$(BUILD)
 export LIBPATHS :=
 
