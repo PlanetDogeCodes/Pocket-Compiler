@@ -6,6 +6,12 @@
 
 ---
 
+## LLM Usage Disclaimer
+
+In accordance with Universal-DB's LLM usage policy guidelines (https://db.universal-team.net/llm-policy), this project is classified as having **Minor LLM Usage** (meaningful portions of the code, documentation, release notes, etc. may have been generated with AI, but the overall project is still being largely human-managed). For more information on the usage of generative AI for this project, please navigate to the **Credits** section of the README.
+
+---
+
 ## What It Does
 
 PocketCompiler is designed to let you:
@@ -139,9 +145,9 @@ The 3DS also has very limited RAM, CPU, GPU power, and screen space, so PocketCo
 
 ## Credits
 
-PocketCompiler project by me.
+PocketCompiler project and idea by PlanetDogeCodes (me).
 Some browser runtime features, custom Canvas/WebGL Integration, and 3DS Optimizations were all made with help from GPT-5.5 xhigh.
-
+Some UI elements and DOM-style event handling were made with help from Claude Sonnet 4.6
 
 
 Built with:
