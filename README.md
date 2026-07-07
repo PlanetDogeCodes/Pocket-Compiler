@@ -146,8 +146,8 @@ The 3DS also has very limited RAM, CPU, GPU power, and screen space, so PocketCo
 ## Credits
 
 PocketCompiler project and idea by PlanetDogeCodes (me).
-Some browser runtime features, custom Canvas/WebGL Integration, and 3DS Optimizations were all made with help from GPT-5.5 xhigh.
-Some UI elements and DOM-style event handling were made with help from Claude Sonnet 4.6
+Some browser runtime features, custom Canvas/WebGL Integration, and 3DS Optimizations were all made with help from GPT-5.5 (xhigh) and GLM 5.2 (max).
+Some UI elements and DOM-style event handling were made with help from Claude Sonnet 5 (high)
 
 
 Built with:
