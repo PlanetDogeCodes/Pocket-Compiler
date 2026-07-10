@@ -1,7 +1,6 @@
-
 # PocketCompiler
 
-**PocketCompiler** is an experimental Nintendo 3DS HTML/JS/CSS compiler and code  editor
+**PocketCompiler** is an experimental Nintendo 3DS HTML/JS/CSS compiler and code editor.
 
 
 ---
@@ -17,10 +16,9 @@ In accordance with Universal-DB's LLM usage policy guidelines (https://db.univer
 PocketCompiler is designed to let you:
 
 - Write HTML/JS/CSS on the 3DS, allowing for easy development
-- You can:
-   - edit code on the bottom screen
-   - preview output/status on the top screen
-   - save/load projects from the SD card
+- Compile and run web pages directly on the top screen with a real DOM-based rendering engine
+- Save/load/rename/delete projects from the SD card
+- Debug with a live JS console
 
 The default project path is:
 
@@ -32,36 +30,70 @@ sdmc:/3ds/PocketCompiler/projects
 
 ### Controls
 
+#### Edit Mode — Editor Tab
+
 | Input | Action |
 |---|---|
-| D-Pad | Arrow key movement |
-| Circle Pad | Move mouse cursor (it's just a dot) |
-| A | Click / edit code line |
-| B | Undo |
-| X | Save project |
-| Y | Load project |
-| START | Run / compile |
-| SELECT | Show controls menu |
+| D-Pad ↑↓ | Scroll code vertically |
+| D-Pad ←→ | Scroll code horizontally |
+| Circle Pad | Move cursor dot |
+| Touch | Snap cursor to tap; tap tabs / code lines / file rows |
+| A | Edit current line (3DS keyboard; auto-indent if empty) |
+| B | Undo (5-step ring) |
+| X | Save project (file explorer) |
+| Y | Load project (file explorer) |
+| L | Toggle JS Console tab |
+| R | Open Actions menu (Find, Go-to, Duplicate, Comment, Rename, Delete, Sort, Export log, Recover autosave) |
+| START | Compile + run |
+| SELECT | Show controls menu (scrollable) |
+
+#### Edit Mode — Console Tab
+
+| Input | Action |
+|---|---|
+| D-Pad ↑↓ | Scroll console log |
+| A | Type & eval JS expression |
+| B | Clear console log |
+| L | Back to editor tab |
+
+#### Run Mode
+
+| Input | Action |
+|---|---|
+| D-Pad | Scroll web page (all directions) |
+| Circle Pad | Move cursor (never scrolls) |
+| A / L | Left-click |
+| B / R | Right-click |
+| X | Release cursor lock |
+| Y | Space key (sent to web content) |
+| START | Stop, return to editor |
 
 ---
 
 ## Features
 
-So far, PocketCompiler includes:
+PocketCompiler includes:
 
-- basic HTML parsing
-- simple CSS
-- basic JavaScript runtime capabilities
-- DOM-like elements
-- keyboard/mouse/touch events
-- nearly complete iframe support
-- `document.write()`
-- Limited API and link fetching
-- IndexedDB-adjacent SD-card storage
-- custom Canvas rendering
-- custom WebGL rendering
-- image loading
-- web audio support
+- HTML parsing with DOM tree construction
+- CSS engine with cascade, inheritance, specificity, custom properties (`var()`), `calc()`, `@media` skip, `:not()`, `:hover`/`:focus`/`:active`/`:checked`/`:disabled`, `:first-child`/`:last-child`/`:nth-child()`, comma selectors, `!important`, box-sizing, flex/grid layout, transitions, box-shadow, linear-gradient, word-wrap, and 40+ CSS properties
+- JavaScript runtime via Duktape (ES5 + subset of ES6)
+- DOM manipulation: `getElementById`, `querySelector`/`querySelectorAll`, `createElement`, `appendChild`, `innerHTML`, `textContent`, `classList`, live `style` object (Proxy-backed), `addEventListener`, `onclick`/`onload`/etc. property handlers
+- Keyboard, mouse, and touch events with bubbling
+- `document.write()` with incremental parsing
+- Software keyboard integration for `<input>`/`<textarea>` text entry and `window.prompt()`
+- Form submission via click on submit buttons
+- `fetch()` / XMLHttpRequest (SD-card backed)
+- localStorage / sessionStorage (SD-card persisted)
+- IndexedDB (SD-card persisted, simplified sync API)
+- Canvas 2D rendering
+- WebGL scaffolding (Citro3D backend)
+- Image loading (PNG via LodePNG)
+- Web Audio (oscillators, gain, WAV playback via NDSP)
+- Near-complete iframe support
+- Auto-save draft (writes to SD on compile + 10s of idle)
+- Crash-recovery: "Recover autosave" action restores unsaved work
+- Remembers last-opened file across launches
+- File explorer: save, load, rename, delete, sort by name/size/date
 
 
 ---
@@ -70,16 +102,8 @@ So far, PocketCompiler includes:
 
 PocketCompiler has rendering systems for:
 
-- canvas command buffers
-- rectangles, lines, text, placeholders
-- `getContext("webgl")` detection
-- buffers
-- shaders/programs
-- uniforms/attributes
-- textures
-- draw calls
-- viewport/depth/blend/scissor state
-- Citro3D backend scaffolding
+- Canvas 2D: rectangles, paths, text, images, gradients, transforms, `fillText`/`strokeText`/`measureText`
+- WebGL: `getContext("webgl")` detection, buffers, shaders/programs, uniforms/attributes, textures, draw calls, viewport/depth/blend/scissor state, Citro3D backend scaffolding
 
 This is **not yet full WebGL**.
 
@@ -90,62 +114,58 @@ This is **not yet full WebGL**.
 PocketCompiler includes SD-card-backed storage systems:
 
 ```text
-sdmc:/3ds/PocketCompiler/idb/
-sdmc:/3ds/PocketCompiler/cache_api/
-sdmc:/3ds/PocketCompiler/resource_cache/
+sdmc:/3ds/PocketCompiler/
+    config.txt        ← last-opened file (auto-managed)
+    autosave.html     ← crash-recovery draft (auto-managed)
+    console_log.txt   ← exported JS console log (written on demand)
+    projects/         ← all .html project files
+    storage/
+        local_*.json  ← localStorage data
+        idb/          ← IndexedDB data
 ```
 
-Supported or scaffolded:
+Supported:
 
-- IndexedDB-style databases/object stores
-- `put`, `get`, `delete`, `clear`, `count`
-- localStorage-style storage
-- sessionStorage-style storage
-- Cache API-style storage
-- binary-safe values
-- 1 MB per-value/resource cap
+- IndexedDB-style databases with `put`, `get`, `delete`, `clear`, `close`
+- localStorage with SD-card persistence
+- sessionStorage (in-memory, per session)
+- Cookie-style storage
 
 ---
 
 ## Audio
 
-PocketCompiler includes a small Web Audio-style system:
+PocketCompiler includes a Web Audio-style system:
 
 - AudioContext-like runtime
-- OscillatorNode-like node
-- GainNode-like node
-- sine/square/triangle/sawtooth tones
+- OscillatorNode (sine/square/triangle/sawtooth)
+- GainNode
+- AudioBufferSourceNode with WAV file loading
 - NDSP-backed output when available
-- safe fallback if audio fails
+- Safe fallback if audio fails
 
 ---
 
 ## Important Limitations
 
-PocketCompiler is still in early development.
+PocketCompiler does **not** yet fully support:
 
-It does **not** yet fully support:
+- Full modern CSS (no CSS animations/@keyframes, no `rotate()`/`scale()` transforms, limited `position: fixed`)
+- Full modern JavaScript (no ES modules, no `async`/`await`, no `Proxy` traps beyond `get`/`set`)
+- Real networking (all `fetch`/XHR URLs resolve to SD-card files)
+- Full WebGL 1.0 (no real GLSL shader translation)
+- Full Canvas 2D API (no `drawImage` from video, no complex path fills)
+- Full Web Audio API (no real-time effects, no offline rendering)
+- Complete iframe isolation
+- Pointer lock
 
-- complete HTML parsing
-- full CSS layout/cascade
-- full modern JavaScript/browser behavior
-- complete Promise/event-loop behavior
-- full WebGL 1.0
-- real GLSL shader translation
-- full Canvas 2D API
-- full Web Audio API
-- full IndexedDB compatibility
-- complete iframe isolation
-- pointer lock
-
-
-The 3DS also has very limited RAM, CPU, GPU power, and screen space, so PocketCompiler uses strict safety limits (1 MB per resource/value/cache entry, bounded event queues, bounded command buffers, bounded editor/runtime structures)
+The 3DS also has very limited RAM, CPU, GPU power, and screen space, so PocketCompiler uses strict safety limits (bounded DOM pool, bounded event queues, bounded command buffers, 4 MB max audio buffer, recursion depth guards).
 
 ---
 
 ## Credits
 
-PocketCompiler project and idea by PlanetDogeCodes (me).
+PocketCompiler project and idea by PlanetDogeCodes.
 Some browser runtime features, custom Canvas/WebGL Integration, and 3DS Optimizations were all made with help from GPT-5.5 (xhigh) and GLM 5.2 (max).
 Some UI elements and DOM-style event handling were made with help from Claude Sonnet 5 (high)
 
