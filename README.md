@@ -7,7 +7,7 @@
 
 ## LLM Usage Disclaimer
 
-In accordance with Universal-DB's LLM usage policy guidelines (https://db.universal-team.net/llm-policy), this project is classified as having **Minor LLM Usage** (meaningful portions of the code, documentation, release notes, etc. may have been generated with AI, but the overall project is still being largely human-managed). For more information on the usage of generative AI for this project, please navigate to the **Credits** section of the README.
+In accordance with Universal-DB's LLM usage policy guidelines (https://db.universal-team.net/llm-policy), this project is classified as having **Minor LLM Usage**. For more information on the usage of generative AI for this project, please navigate to the **Credits** section of the README.
 
 ---
 
@@ -15,8 +15,8 @@ In accordance with Universal-DB's LLM usage policy guidelines (https://db.univer
 
 PocketCompiler is designed to let you:
 
-- Write HTML/JS/CSS on the 3DS, allowing for easy development
-- Compile and run web pages directly on the top screen with a real DOM-based rendering engine
+- Write HTML/JS/CSS on the 3DS
+- Compile and run your written code directly on the top screen with a real DOM-based rendering engine
 - Save/load/rename/delete projects from the SD card
 - Debug with a live JS console
 
@@ -165,9 +165,10 @@ The 3DS also has very limited RAM, CPU, GPU power, and screen space, so PocketCo
 
 ## Credits
 
-PocketCompiler project and idea by PlanetDogeCodes.
-Some browser runtime features, custom Canvas/WebGL Integration, and 3DS Optimizations were all made with help from GPT-5.5 (xhigh) and GLM 5.2 (max).
-Some UI elements and DOM-style event handling were made with help from Claude Sonnet 5 (high)
+PocketCompiler project idea and most code by PlanetDogeCodes.
+
+Custom Canvas/WebGL Integration and 3DS Optimizations were all made with help from GLM 5.2 (max).
+Some UI elements and DOM-style event handling were made with help from Claude Opus 5 (ultra)
 
 
 Built with:
@@ -178,3 +179,5 @@ Built with:
 - libctru
 - Citro2D
 - Citro3D
+- Makerom
+- Bannertool
